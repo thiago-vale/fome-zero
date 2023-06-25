@@ -3,6 +3,7 @@ from PIL import Image
 import pandas as pd
 import numpy as no
 from utils.clean import CleanCode
+import plotly.express as px
 import folium
 from streamlit_folium import folium_static
 from folium.plugins import MarkerCluster
@@ -19,9 +20,31 @@ def clean_code(df):
 
     return df
 
+def qtd_registrados_pais(df,column,assunto):
+    cols = ['country',column]
+    pais = df.loc[:,cols].groupby('country').nunique().sort_values(column,ascending=False).reset_index()
+    pais = pais.rename(
+            columns={'country': 'País', column: assunto})
+    fig = px.bar(pais, x='País', y=assunto,
+                hover_data=['País', assunto],
+                color_discrete_sequence=px.colors.qualitative.T10)\
+                    .update_layout(title=f'Quantidade de {assunto} Registrados por País',title_x=0.3)
+    return fig
+
+def media_pais(df,column,assunto):
+    pais = round(df.groupby('country')[column].mean().sort_values(ascending=False).reset_index(),2)
+    pais = pais.rename(
+            columns={'country': 'País', column: assunto})
+    fig = px.bar(pais, x='País', y=assunto,
+                hover_data=['País', assunto],
+                color_discrete_sequence=px.colors.qualitative.T10)\
+                    .update_layout(title=f'Média de {assunto} por País',title_x=0.3)
+    return fig
+
 df = pd.read_csv('./data/zomato.csv')
 
 df = clean_code(df)
+df = df.drop_duplicates()
 
 st.set_page_config(page_title='Countries',
                    page_icon="🏠",
@@ -66,3 +89,34 @@ csv = df_filtrado.to_csv(index=False)
 
 # Botão de download
 st.sidebar.download_button(label="Download data as CSV",data=csv,file_name='fome-zero.csv',mime='text/csv')
+
+
+with st.container():
+
+    fig1 = qtd_registrados_pais(df_filtrado,'city','Cidades')
+
+    st.plotly_chart(fig1,use_container_width=True)
+
+
+
+with st.container():
+
+    fig = qtd_registrados_pais(df_filtrado,'restaurant_id','Restaurantes')
+
+    st.plotly_chart(fig,use_container_width=True)   
+
+with st.container():
+
+    col1,col2 = st.columns(2)
+
+    with col1:
+
+        fig = media_pais(df_filtrado,'votes','Avaliações Feitas')
+
+        st.plotly_chart(fig)
+
+    with col2:
+
+        fig = media_pais(df_filtrado,'average_cost_for_two','Preço de um prato pra duas pessoas')
+
+        st.plotly_chart(fig)

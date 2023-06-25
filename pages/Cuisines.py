@@ -22,6 +22,7 @@ def clean_code(df):
 df = pd.read_csv('./data/zomato.csv')
 
 df = clean_code(df)
+df = df.drop_duplicates()
 
 st.set_page_config(page_title='Home',
                    page_icon="🏠",
