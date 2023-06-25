@@ -50,22 +50,6 @@ st.set_page_config(page_title='Countries',
                    page_icon="🏠",
                    layout="wide")
 
-# Caminho da imagem
-image_path = './images/2-FOME-ZERE-E-AGRICULTURA-SUSTENTAVEL@2x.png'
-st.sidebar.markdown('''___''')
-# Carregar imagem
-image = Image.open(image_path)
-
-# Configurar layout de duas colunas
-col1, col2 = st.sidebar.columns([1, 4])
-
-# Coluna 1: Exibir a imagem
-with col1:
-    st.image(image, width=120)
-
-# Coluna 2: Exibir o título centralizado
-with col2:
-    st.sidebar.markdown('<h1 style="text-align: center;">Fome Zero</h1>', unsafe_allow_html=True)
 #Filtros
 st.sidebar.markdown('# Filtros')
 
@@ -85,18 +69,12 @@ paises_selecionados = st.sidebar.multiselect('Países', paises, default=paises_s
 
 df_filtrado = df[df['country'].isin(paises_selecionados)]
 
-csv = df_filtrado.to_csv(index=False)
-
-# Botão de download
-st.sidebar.download_button(label="Download data as CSV",data=csv,file_name='fome-zero.csv',mime='text/csv')
-
 
 with st.container():
 
     fig1 = qtd_registrados_pais(df_filtrado,'city','Cidades')
 
     st.plotly_chart(fig1,use_container_width=True)
-
 
 
 with st.container():
