@@ -1,1 +1,2 @@
-inflection
+inflection==0.5.1
+folium==0.14.0
