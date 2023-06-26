@@ -127,6 +127,6 @@ with st.container():
                     color='País',
                     hover_data=['Cidade', 'País', 'cuisines'],
                     color_discrete_sequence=px.colors.qualitative.T10)\
-                        .update_layout(title='Top 10 Cidades com mais restaurantes com topos cúlinarios distinctos',title_x=0.3)
+                        .update_layout(title='Top 10 Cidades com mais restaurantes com tipos culinarios distintos',title_x=0.3)
         
         st.plotly_chart(fig,use_container_width=True)
