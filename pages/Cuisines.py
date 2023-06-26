@@ -75,6 +75,9 @@ cozinhas_selecionadas = st.sidebar.multiselect('Culinarias',culinarias, default=
 df_filtrado = df[df['country'].isin(paises_selecionados) & df['cuisines'].isin(cozinhas_selecionadas)]
 df_pais = df[df['country'].isin(paises_selecionados)]
 
+st.sidebar.markdown('''---''')
+st.sidebar.markdown(''' Powered by Thiago Vale''')
+
 st.title('Visão Tipos de Culinarias')
 
 with st.container():

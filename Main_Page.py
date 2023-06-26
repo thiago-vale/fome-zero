@@ -57,6 +57,9 @@ csv = df_filtrado.to_csv(index=False)
 
 st.sidebar.download_button(label="Download data as CSV",data=csv,file_name='fome-zero.csv',mime='text/csv')
 
+st.sidebar.markdown('''---''')
+st.sidebar.markdown(''' Powered by Thiago Vale''')
+
 st.write("# Fome Zero!")
 st.write("## O Melhor lugar para encontrar seu mais novo restaurante favorito!")
 

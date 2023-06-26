@@ -69,6 +69,8 @@ paises_selecionados = st.sidebar.multiselect('Países', paises, default=paises_s
 
 df_filtrado = df[df['country'].isin(paises_selecionados)]
 
+st.sidebar.markdown('''---''')
+st.sidebar.markdown(''' Powered by Thiago Vale''')
 
 with st.container():
 
