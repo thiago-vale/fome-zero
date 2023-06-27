@@ -129,8 +129,8 @@ with st.container():
 
 with st.container():
     st.markdown(f'## Top {qtd_restaurentes} Restaurantes')
-    restaurante = df_filtrado[df_filtrado['aggregate_rating'] == df_filtrado['aggregate_rating']\
-                     .max()].sort_values('restaurant_id')[['restaurant_id','restaurant_name','country','city','average_cost_for_two', 'aggregate_rating','votes']]
+    restaurante = df_filtrado.loc[:,['restaurant_id','restaurant_name','country','city','cuisines','average_cost_for_two', 'aggregate_rating','votes']]\
+                        .sort_values('aggregate_rating',ascending=False)
     restaurante = restaurante.reset_index(drop=True)
     st.dataframe(restaurante.head(qtd_restaurentes))
 
