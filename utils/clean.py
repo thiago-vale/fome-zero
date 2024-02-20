@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import inflection
+
 
 
 COUNTRIES = {
@@ -56,18 +56,23 @@ class CleanCode():
     def color_name(self,color_code):
         return COLORS[color_code]
     
-    def rename_columns(self,dataframe):
+    def rename_columns(self, dataframe):
         df = dataframe.copy()
-        title = lambda x: inflection.titleize(x)
-        snakecase = lambda x: inflection.underscore(x)
-        spaces = lambda x: x.replace(" ", "")
+        
+        def snakecase(x):
+            return x.replace(" ", "_").lower()
+
         cols_old = list(df.columns)
-        cols_old = list(map(title, cols_old))
-        cols_old = list(map(spaces, cols_old))
+
         cols_new = list(map(snakecase, cols_old))
+        cols_old = list(map(str.strip, cols_old))  # Removendo espaços extras
+
+        
+        # Renomeando as colunas no dataframe
         df.columns = cols_new
+        
         return df
-    
+
     def find_nan_columns(dataframe):
         nan_columns = dataframe.columns[dataframe.isna().any()]
         return nan_columns
