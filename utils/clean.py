@@ -65,14 +65,14 @@ class CleanCode():
         cols_old = list(df.columns)
 
         cols_new = list(map(snakecase, cols_old))
-        cols_old = list(map(str.strip, cols_old))  # Removendo espaços extras
+       
+ cols_old = list(map(str.strip, cols_old))  # Removendo espaços extras
 
         
         # Renomeando as colunas no dataframe
         df.columns = cols_new
         
         return df
-
     def find_nan_columns(dataframe):
         nan_columns = dataframe.columns[dataframe.isna().any()]
         return nan_columns

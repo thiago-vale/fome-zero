@@ -161,6 +161,6 @@ with st.container():
                 y='aggregate_rating', 
                 hover_data=['cuisines','aggregate_rating',],
                 color_discrete_sequence=px.colors.qualitative.T10)\
-                    .update_layout(title='top 10 melhores tipos de Culinaria',title_x=0.3)
+                    .update_layout(title='top 10 piores tipos de Culinaria',title_x=0.3)
 
         st.plotly_chart(fig,use_container_width=True)
