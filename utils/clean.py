@@ -66,7 +66,7 @@ class CleanCode():
 
         cols_new = list(map(snakecase, cols_old))
        
- cols_old = list(map(str.strip, cols_old))  # Removendo espaços extras
+        cols_old = list(map(str.strip, cols_old))  # Removendo espaços extras
 
         
         # Renomeando as colunas no dataframe
